@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="InventoryManagementGUI.View.MyComboBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:InventoryManagementGUI.View"
+             mc:Ignorable="d" 
+             d:DesignWidth="200" d:Background="White" Name="myComboBox">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="MyBoolToVisibilityConverter" />
+    </UserControl.Resources>
+
+    <StackPanel Margin="20 10">
+        <TextBlock Text="{Binding Path=Caption,ElementName=myComboBox}" Foreground="#97A5B4" FontSize="13" Margin="0 0 0 8"/>
+
+        <Grid>
+            <ComboBox Name="textBox" Style="{StaticResource comboBoxCustom}"/>
+        </Grid>
+    </StackPanel>
+</UserControl>
