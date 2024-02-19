@@ -22,5 +22,12 @@ namespace InventoryManagementGUI
         {
             Close();
         }
+
+        private void btn_LogOut(object sender, RoutedEventArgs e)
+        {
+            Login log = new Login();
+            log.Show();
+            this.Close();
+        }
     }
 }

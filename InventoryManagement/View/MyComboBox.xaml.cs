@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,5 +33,13 @@ namespace InventoryManagementGUI.View
         }
 
         public static readonly DependencyProperty CaptionProperty = DependencyProperty.Register("Caption", typeof(string), typeof(MyComboBox));
+
+        public ObservableCollection<KeyValuePair<string, string>> DataList
+        {
+            get { return (ObservableCollection<KeyValuePair<string, string>>)GetValue(DataListProperty); }
+            set { SetValue(DataListProperty, value); }
+        }
+
+        public static readonly DependencyProperty DataListProperty = DependencyProperty.Register("DataList", typeof(ObservableCollection<KeyValuePair<string, string>>), typeof(MyComboBox));
     }
 }

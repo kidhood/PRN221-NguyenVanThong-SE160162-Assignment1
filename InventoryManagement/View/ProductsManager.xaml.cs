@@ -68,5 +68,39 @@ namespace InventoryManagementGUI.View
             productDetail.Show();
         }
 
+        private void btn_UpdateProduct(object sender, RoutedEventArgs e)
+        {
+            var productSelected = (Product) productDataGrid.SelectedItem;
+            ProductDetail productDetail = new ProductDetail(productSelected, true);
+            var isShow = productDetail.ShowDialog();
+
+            if (isShow != null && isShow.Value)
+            {
+                productDataGrid.ItemsSource = productService.GetProductByPaging(1);
+            }
+            else
+            {
+                productDataGrid.ItemsSource = productService.GetProductByPaging(1);
+            }
+        }
+
+        private void btn_DeleteProduct(object sender, RoutedEventArgs e)
+        {
+            if (MessageBox.Show("Do you want to delete this product?",
+            "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+            {
+                var productSelected = (Product)productDataGrid.SelectedItem;
+                productSelected.IsDelete = true;
+                if(productService.UpdateProduct(productSelected))
+                {
+                    MessageBox.Show("Delete product successfully");
+                    productDataGrid.ItemsSource = productService.GetProductByPaging(1);
+                }
+                else
+                {
+                    MessageBox.Show("Delete product fail");
+                }
+            }
+        }
     }
 }

@@ -27,5 +27,15 @@ namespace InventoryManagementService
         {
             return productRepository.GetProductByPaging(pageNumber);
         }
+
+        public bool RegisterProduct(Product product)
+        {
+            return productRepository.SaveProduct(product);
+        }
+
+        public bool UpdateProduct(Product product)
+        {
+            return productRepository.UpdateProduct(product);
+        }
     }
 }

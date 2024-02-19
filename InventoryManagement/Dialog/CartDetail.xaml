@@ -1,0 +1,99 @@
+﻿<Window x:Class="InventoryManagementGUI.Dialog.CartDetail"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:Icon="http://metro.mahapps.com/winfx/xaml/iconpacks"
+        xmlns:local="clr-namespace:InventoryManagementGUI.Dialog"
+        mc:Ignorable="d"
+        Title="CartDetail" Height="450" Width="600"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None" >
+    <Grid Margin="25">
+        <Border  CornerRadius="20" />
+        <Grid>
+            <Grid.RowDefinitions >
+                <RowDefinition Height="250"/>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <DataGrid Grid.Row="0" RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" x:Name="cartDataGrid" Style="{DynamicResource DataGridStyle1}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="#" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding Id}"/>
+                    <DataGridTemplateColumn Header="Name" IsReadOnly="True" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Name}" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" IsReadOnly="True" Width="*"/>
+                    <DataGridTextColumn Header="Price" Binding="{Binding Price}" IsReadOnly="True" Width="*"/>
+                    <DataGridTextColumn Header="Total price" Binding="{Binding TotalPrice}" IsReadOnly="True" Width="*"/>
+
+                    <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="auto" x:Name="operatorColumn">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Margin="5 0 0 0" Style="{StaticResource gridRemoveButton}" Click="btn_RemoveCartItem"  >
+                                        <Icon:PackIconMaterial Kind="DeleteOutline" Style="{StaticResource gridButtonIcon}"/>
+                                    </Button>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <StackPanel Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0 0 10 0">
+                    <Label Content="Total product:"  FontSize="16"  FontWeight="SemiBold" Foreground="#121518" />
+                </StackPanel>
+
+                <StackPanel Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left">
+                    <TextBlock x:Name="txtTotalProduct" FontSize="16"/>
+                </StackPanel>
+
+                <StackPanel Grid.Row="1" Grid.Column="0" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0 0 10 0">
+                    <Label Content="Total price:" FontSize="16" FontWeight="SemiBold" Foreground="#121518"  />
+                </StackPanel>
+
+                <StackPanel Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0 5 0 0">
+                    <TextBlock x:Name="txtTotalPrice" FontSize="16"/>
+                </StackPanel>
+            </Grid>
+
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <Button Style="{StaticResource removeButton}"  IsCancel="True" Grid.Row="4" Grid.Column="0" Margin="0 0 10 0" Click="btn_Cancel" >
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock  Text="Cancel"/>
+                    </StackPanel>
+                </Button>
+
+                <Button Style="{StaticResource addButton}" Grid.Row="4" Grid.Column="1" HorizontalAlignment="Left" IsCancel="False"  Margin="10 0 0 0" Click="btn_Order" x:Name="btnOrder">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="Order" />
+                    </StackPanel>
+                </Button>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

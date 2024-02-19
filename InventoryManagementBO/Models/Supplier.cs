@@ -7,7 +7,7 @@ namespace InventoryManagementBO.Models
     {
         public Supplier()
         {
-            Inventories = new HashSet<Inventory>();
+            Products = new HashSet<Product>();
         }
 
         public int Id { get; set; }
@@ -15,7 +15,8 @@ namespace InventoryManagementBO.Models
         public string? Phone { get; set; }
         public string? Email { get; set; }
         public string? Address { get; set; }
+        public bool? IsDelete { get; set; }
 
-        public virtual ICollection<Inventory> Inventories { get; set; }
+        public virtual ICollection<Product> Products { get; set; }
     }
 }

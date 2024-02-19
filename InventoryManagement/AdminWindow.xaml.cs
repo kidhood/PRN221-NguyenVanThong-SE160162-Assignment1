@@ -23,5 +23,18 @@ namespace InventoryManagementGUI
         {
             InitializeComponent();
         }
+
+
+        private void CloseApp_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void btn_LogOut(object sender, RoutedEventArgs e)
+        {
+            Login log = new Login();
+            log.Show();
+            this.Close();
+        }
     }
 }

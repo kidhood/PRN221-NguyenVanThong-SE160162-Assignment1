@@ -97,24 +97,26 @@
                         </Grid>
 
                     </Menu:Btn>
+                    <Menu:Btn Style="{StaticResource BtnStyle}">
 
-                    <!--// Settings //-->
+                    </Menu:Btn>
+                    <Menu:Btn Style="{StaticResource BtnStyle}">
 
-                    <Menu:Btn Style="{StaticResource BtnStyle}"
-                       Command="{Binding SettingsCommand}">
-
-                        <Grid>
-
-                            <Image Source="Images/img_setting.png"
-                            Style="{StaticResource Image_Style}" />
-
-                            <TextBlock Text="Settings"
-                                Style="{StaticResource Text_Style}" />
-
-                        </Grid>
+                    </Menu:Btn>
+                    <Menu:Btn Style="{StaticResource BtnStyle}">
 
                     </Menu:Btn>
 
+                    <Menu:Btn Style="{StaticResource BtnStyle}" Click="btn_LogOut" >
+                        <Grid>
+
+                            <Image Source="Images/logout_img.png"
+                            Style="{StaticResource Image_Style}" />
+
+                            <TextBlock Text="Logout"
+                             Style="{StaticResource Text_Style}" />
+                        </Grid>
+                    </Menu:Btn>
                 </StackPanel>
 
             </Grid>

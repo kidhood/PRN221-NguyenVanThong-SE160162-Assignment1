@@ -1,4 +1,5 @@
 ﻿using InventoryManagementBO.Models;
+using InventoryManagementGUI.Dialog;
 using InventoryManagementService;
 using InventoryManagementService.Interface;
 using System;
@@ -46,12 +47,30 @@ namespace InventoryManagementGUI.View
             var productSelected = (Product) productDataGrid.SelectedItem;
             if(productIds.TryGetValue(productSelected.Id, out var product))
             {
-                product.Quantity++;
+                if(productSelected.Quantity > product.Quantity)
+                {
+                    product.Quantity++;
+                }
+                else
+                {
+                    MessageBox.Show("Product out of stock");
+                }
             }
             else
             {
-                productSelected.Quantity = 1;
-                productIds.Add(productSelected.Id, productSelected);
+                if(productSelected.Quantity > 0)
+                {
+                    var productTemp = new Product();
+                    productTemp.Quantity = 1;
+                    productTemp.Price = productSelected.Price;
+                    productTemp.Id = productSelected.Id;
+                    productTemp.Name = productSelected.Name;
+                    productIds.Add(productSelected.Id, productTemp);
+                }
+                else
+                {
+                    MessageBox.Show("Product out of stock");
+                }
             }
 
             txtNumberCart.Text = productIds.Values.Count().ToString();
@@ -62,6 +81,21 @@ namespace InventoryManagementGUI.View
             productDataGrid.ItemsSource = productService.GetProductByName(textBoxSearch.Text);
         }
 
+        private void btn_ShowCartItem(object sender, RoutedEventArgs e)
+        {
+            CartDetail cartDetail = new CartDetail(this.productIds.Values.ToList());
+            var isClose = cartDetail.ShowDialog();
+            if(isClose != null && isClose.Value)
+            {
+                productIds = new Dictionary<int, Product>();
+                txtNumberCart.Text = "0";
+            }
+            else
+            {
+            }
 
+            productDataGrid.ItemsSource = productService.GetProductByPaging(1);
+            txtNumberCart.Text = productIds.Values.Count().ToString();
+        }
     }
 }

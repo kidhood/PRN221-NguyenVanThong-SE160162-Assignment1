@@ -9,6 +9,7 @@ namespace InventoryManagementBO.Models
         public int? Quantiy { get; set; }
         public int? ProductId { get; set; }
         public int? OrderId { get; set; }
+        public double? Price { get; set; }
 
         public virtual Order? Order { get; set; }
         public virtual Product? Product { get; set; }

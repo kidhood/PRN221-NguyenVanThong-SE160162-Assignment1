@@ -53,21 +53,10 @@
             <Separator Height="1" Grid.Row="3" Background="#DAE2EA" Margin="0 -1 0 10"/>
 
             <!--Counter Title-->
-            <TextBlock Text="Manager" Grid.Row="4" FontSize="18" FontWeight="SemiBold" Foreground="#121518" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-
-            <TextBlock Text="Filter by" Grid.Row="4" FontSize="13" FontWeight="SemiBold" Margin="0 0 215 0" Foreground="#121518" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-
-            <!--Filter Textbox-->
-            <Grid Width="200" HorizontalAlignment="Right" Grid.Row="4">
-                <TextBlock Margin="15 0" VerticalAlignment="Center" Foreground="#B0B9C6" IsHitTestVisible="False"
-                     Panel.ZIndex="1" Text="Search in Product ..."
-                     Visibility="{Binding ElementName=textBoxFilter, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}" />
-
-                <TextBox Name="textBoxFilter" Style="{StaticResource filterTextBox}"/>
-            </Grid>
+            <TextBlock x:Name="txtCounter" Text="List order" Grid.Row="4" FontSize="18" FontWeight="SemiBold" Foreground="#121518" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
             <!--Members Data Grid-->
-            <DataGrid ItemsSource="{Binding ProductDataGrid}" RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" x:Name="productDataGrid" Style="{DynamicResource DataGridStyle1}">
+            <DataGrid ItemsSource="{Binding OrdersDataGrid}" RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" x:Name="orderDataGrid" Style="{DynamicResource DataGridStyle1}">
                 <DataGrid.Columns>
                     <DataGridCheckBoxColumn Header="C" CanUserResize="False" Width="auto" ElementStyle="{StaticResource CheckBoxStyle1}">
                         <DataGridCheckBoxColumn.HeaderTemplate>
@@ -77,24 +66,22 @@
                         </DataGridCheckBoxColumn.HeaderTemplate>
                     </DataGridCheckBoxColumn>
                     <DataGridTextColumn Header="#" IsReadOnly="True" CanUserResize="False" Width="auto" Binding="{Binding Id}"/>
-                    <DataGridTemplateColumn Header="Name" IsReadOnly="True" Width="*">
+                    <DataGridTemplateColumn Header="Order Date" IsReadOnly="True" Width="*">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding Name}" VerticalAlignment="Center"/>
+                                    <TextBlock Text="{Binding OrderDate}" VerticalAlignment="Center"/>
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" IsReadOnly="True" Width="*"/>
-                    <DataGridTextColumn Header="Price" Binding="{Binding Price}" IsReadOnly="True" Width="*"/>
-                    <DataGridTextColumn Header="Description" Binding="{Binding Description}" IsReadOnly="True" Width="*"/>
+                    <DataGridTextColumn Header="Total Cost" Binding="{Binding TotalCost}" IsReadOnly="True" Width="*"/>
                     <DataGridTemplateColumn Header="Operations" IsReadOnly="True" Width="auto">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <Button Style="{StaticResource gridEditButton}">
-                                        <Icon:PackIconMaterial Kind="PlusCircleOutline" Style="{StaticResource gridButtonIcon}"/>
+                                    <Button Style="{StaticResource gridEditButton}" Click="btn_ViewOrderDetail">
+                                        <Icon:PackIconMaterial Kind="PencilOutline" Style="{StaticResource gridButtonIcon}"/>
                                     </Button>
                                 </StackPanel>
                             </DataTemplate>
@@ -111,15 +98,13 @@
                     </Button>
                     <Rectangle Width="1" Fill="#DEE4EC" Margin="3 7"/>
 
-                    <Button Style="{StaticResource pagingButton}" Content="1"/>
-                    <Button Style="{StaticResource pagingButton}" Content="2"/>
-                    <Button Style="{StaticResource pagingButton}" Content="3"/>
+                    <Button Style="{StaticResource pagingButton}" Content="1" />
+                    <Button Style="{StaticResource pagingButton}" Content="2" />
+                    <Button Style="{StaticResource pagingButton}" Content="3" />
 
-                    <TextBlock Text="..." Foreground="#6C7682" VerticalAlignment="Center" Margin="10 0" FontSize="15"/>
-
-                    <Button Style="{StaticResource pagingButton}" Content="7"/>
-                    <Button Style="{StaticResource pagingButton}" Content="8"/>
-                    <Button Style="{StaticResource pagingButton}" Content="9"/>
+                    <Button Style="{StaticResource pagingButton}" Content="4" />
+                    <Button Style="{StaticResource pagingButton}" Content="5" />
+                    <Button Style="{StaticResource pagingButton}" Content="6" />
 
                     <Rectangle Width="1" Fill="#DEE4EC" Margin="3 7"/>
                     <Button Style="{StaticResource pagingButton}">

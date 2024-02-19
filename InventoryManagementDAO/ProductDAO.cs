@@ -1,4 +1,5 @@
 ﻿using InventoryManagementBO.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,6 +45,55 @@ namespace InventoryManagementDAO
         public List<Product> getProductsByName(string name)
         {
             return _dbContext.Products.Where(p => !p.IsDelete.Value && p.Name.ToLower().Contains(name)).ToList(); 
+        }
+
+        public bool SaveProduct(Product product)
+        {
+            try
+            {
+                _dbContext.Products.Add(product);
+                _dbContext.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool UpdateProduct(Product product)
+        {
+            try
+            {
+                _dbContext.ChangeTracker.Clear();
+                _dbContext.Products.Update(product);
+                _dbContext.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public bool UpdateProducts(List<Product> products)
+        {
+            try
+            {
+                _dbContext.ChangeTracker.Clear();
+                _dbContext.Products.UpdateRange(products);
+                _dbContext.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public List<Product> GetProductsByIds(List<int?> list)
+        {
+            return _dbContext.Products.Where(x => list.Contains(x.Id)).ToList();
         }
     }
 }

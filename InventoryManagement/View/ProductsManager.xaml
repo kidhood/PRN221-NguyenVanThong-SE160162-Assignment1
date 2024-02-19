@@ -37,7 +37,7 @@
 
                 <TextBox Name="textBoxSearch" Style="{DynamicResource searchTextbox}"/>
 
-                <Button Width="15" Height="15" VerticalAlignment="Center" Margin="0 0 15 0" BorderBrush="Transparent" Foreground="Transparent" HorizontalAlignment="Right" Click="btn_SearchByName">
+                <Button Width="20" Height="20" VerticalAlignment="Center" Margin="0 0 15 0" BorderBrush="Transparent" Foreground="Transparent"  Background="{x:Null}"  HorizontalAlignment="Right" Click="btn_SearchByName">
                     <Icon:PackIconMaterial Kind="Magnify" Foreground="#B0B9C6" Width="15" Height="15"  />
                 </Button>
             </Grid>
@@ -57,18 +57,7 @@
             <Separator Height="1" Grid.Row="3" Background="#DAE2EA" Margin="0 -1 0 10"/>
 
             <!--Counter Title-->
-            <TextBlock Text="Staff" Grid.Row="4" FontSize="18" FontWeight="SemiBold" Foreground="#121518" HorizontalAlignment="Left" VerticalAlignment="Center"/>
-
-            <TextBlock Text="Filter by" Grid.Row="4" FontSize="13" FontWeight="SemiBold" Margin="0 0 215 0" Foreground="#121518" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-
-            <!--Filter Textbox-->
-            <Grid Width="200" HorizontalAlignment="Right" Grid.Row="4">
-                <TextBlock Margin="15 0" VerticalAlignment="Center" Foreground="#B0B9C6" IsHitTestVisible="False"
-                        Panel.ZIndex="1" Text="Search in Product ..."
-                        Visibility="{Binding ElementName=textBoxFilter, Path=Text.IsEmpty, Converter={StaticResource BoolToVis}}" />
-
-                <TextBox Name="textBoxFilter" Style="{StaticResource filterTextBox}"/>
-            </Grid>
+            <TextBlock Text="List product" Grid.Row="4" FontSize="18" FontWeight="SemiBold" Foreground="#121518" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
             <!--Members Data Grid-->
             <DataGrid ItemsSource="{Binding ProductDataGrid}" RowStyle="{DynamicResource DataGridRowStyle1}" ColumnHeaderStyle="{DynamicResource DataGridColumnHeaderStyle1}" CellStyle="{DynamicResource DataGridCellStyle1}" x:Name="productDataGrid" Style="{DynamicResource DataGridStyle1}">
@@ -97,8 +86,11 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <Button Style="{StaticResource gridEditButton}" Click="btn_AddToCart">
-                                        <Icon:PackIconMaterial Kind="PlusCircleOutline" Style="{StaticResource gridButtonIcon}"/>
+                                    <Button Style="{StaticResource gridEditButton}" Click="btn_UpdateProduct">
+                                        <Icon:PackIconMaterial Kind="PencilOutline" Style="{StaticResource gridButtonIcon}"/>
+                                    </Button>
+                                    <Button Margin="5 0 0 0" Style="{StaticResource gridRemoveButton}" Click="btn_DeleteProduct">
+                                        <Icon:PackIconMaterial Kind="DeleteOutline" Style="{StaticResource gridButtonIcon}"/>
                                     </Button>
                                 </StackPanel>
                             </DataTemplate>
@@ -119,11 +111,9 @@
                     <Button Style="{StaticResource pagingButton}" Content="2" Click="btn_PagingClick"  />
                     <Button Style="{StaticResource pagingButton}" Content="3" Click="btn_PagingClick" />
 
-                    <TextBlock Text="..." Foreground="#6C7682" VerticalAlignment="Center" Margin="10 0" FontSize="15"/>
-
-                    <Button Style="{StaticResource pagingButton}" Content="7"/>
-                    <Button Style="{StaticResource pagingButton}" Content="8"/>
-                    <Button Style="{StaticResource pagingButton}" Content="9"/>
+                    <Button Style="{StaticResource pagingButton}" Content="4" Click="btn_PagingClick"/>
+                    <Button Style="{StaticResource pagingButton}" Content="5" Click="btn_PagingClick"/>
+                    <Button Style="{StaticResource pagingButton}" Content="6" Click="btn_PagingClick"/>
 
                     <Rectangle Width="1" Fill="#DEE4EC" Margin="3 7"/>
                     <Button Style="{StaticResource pagingButton}">

@@ -18,7 +18,6 @@ namespace InventoryManagementBO.Models
         }
 
         public virtual DbSet<Account> Accounts { get; set; } = null!;
-        public virtual DbSet<Inventory> Inventories { get; set; } = null!;
         public virtual DbSet<Order> Orders { get; set; } = null!;
         public virtual DbSet<OrderDetail> OrderDetails { get; set; } = null!;
         public virtual DbSet<Product> Products { get; set; } = null!;
@@ -44,7 +43,6 @@ namespace InventoryManagementBO.Models
             return strConn;
         }
 
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Account>(entity =>
@@ -68,34 +66,6 @@ namespace InventoryManagementBO.Models
                     .HasMaxLength(30)
                     .IsUnicode(false)
                     .HasColumnName("user_name");
-            });
-
-            modelBuilder.Entity<Inventory>(entity =>
-            {
-                entity.ToTable("inventory");
-
-                entity.Property(e => e.Id).HasColumnName("id");
-
-                entity.Property(e => e.Date)
-                    .HasColumnType("datetime")
-                    .HasColumnName("date");
-
-                entity.Property(e => e.InventoryType).HasColumnName("inventory_type");
-
-                entity.Property(e => e.SupplierId).HasColumnName("supplier_id");
-
-                entity.Property(e => e.TotalCost)
-                    .HasColumnType("decimal(10, 2)")
-                    .HasColumnName("total_cost");
-
-                entity.Property(e => e.TotalQuantity)
-                    .HasColumnName("total_quantity")
-                    .HasDefaultValueSql("((0))");
-
-                entity.HasOne(d => d.Supplier)
-                    .WithMany(p => p.Inventories)
-                    .HasForeignKey(d => d.SupplierId)
-                    .HasConstraintName("FK_supplier");
             });
 
             modelBuilder.Entity<Order>(entity =>
@@ -134,6 +104,8 @@ namespace InventoryManagementBO.Models
                     .HasColumnName("quantiy")
                     .HasDefaultValueSql("((0))");
 
+                entity.Property(e => e.Price).HasColumnName("price");
+
                 entity.HasOne(d => d.Order)
                     .WithMany(p => p.OrderDetails)
                     .HasForeignKey(d => d.OrderId)
@@ -160,8 +132,6 @@ namespace InventoryManagementBO.Models
                     .IsUnicode(false)
                     .HasColumnName("image_path");
 
-                entity.Property(e => e.InventoryId).HasColumnName("inventory_id");
-
                 entity.Property(e => e.IsDelete).HasColumnName("is_delete");
 
                 entity.Property(e => e.Name)
@@ -174,10 +144,12 @@ namespace InventoryManagementBO.Models
                     .HasColumnName("quantity")
                     .HasDefaultValueSql("((0))");
 
-                entity.HasOne(d => d.Inventory)
+                entity.Property(e => e.SupplierId).HasColumnName("supplier_id");
+
+                entity.HasOne(d => d.Supplier)
                     .WithMany(p => p.Products)
-                    .HasForeignKey(d => d.InventoryId)
-                    .HasConstraintName("FK_inventory");
+                    .HasForeignKey(d => d.SupplierId)
+                    .HasConstraintName("FK__product__supplie__5AEE82B9");
             });
 
             modelBuilder.Entity<Supplier>(entity =>
@@ -185,6 +157,8 @@ namespace InventoryManagementBO.Models
                 entity.ToTable("supplier");
 
                 entity.Property(e => e.Id).HasColumnName("id");
+
+                entity.Property(e => e.IsDelete).HasColumnName("is_delete");
 
                 entity.Property(e => e.Address)
                     .HasMaxLength(256)

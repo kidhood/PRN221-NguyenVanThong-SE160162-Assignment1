@@ -18,14 +18,14 @@ namespace InventoryManagementGUI.ViewModel
         }
 
         public ICommand HomeCommand { get; set; }
-        public ICommand CustomersCommand { get; set; }
+        public ICommand SupplierCommand { get; set; }
         public ICommand ProductsCommand { get; set; }
         public ICommand OrdersCommand { get; set; }
         public ICommand TransactionsCommand { get; set; }
         public ICommand SettingsCommand { get; set; }
 
         private void Home(object obj) => CurrentView = new HomeVM();
-        private void Customer(object obj) => CurrentView = new CustomerVM();
+        private void Supplier(object obj) => CurrentView = new SupplierVM();
         private void Product(object obj) => CurrentView = new ProductVM();
         private void Order(object obj) => CurrentView = new OrderVM();
         private void Transaction(object obj) => CurrentView = new TransactionVM();
@@ -34,7 +34,7 @@ namespace InventoryManagementGUI.ViewModel
         public NavigationVM()
         {
             HomeCommand = new RelayCommand(Home);
-            CustomersCommand = new RelayCommand(Customer);
+            SupplierCommand = new RelayCommand(Supplier);
             ProductsCommand = new RelayCommand(Product);
             OrdersCommand = new RelayCommand(Order);
             TransactionsCommand = new RelayCommand(Transaction);

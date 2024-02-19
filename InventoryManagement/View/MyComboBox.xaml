@@ -14,7 +14,7 @@
         <TextBlock Text="{Binding Path=Caption,ElementName=myComboBox}" Foreground="#97A5B4" FontSize="13" Margin="0 0 0 8"/>
 
         <Grid>
-            <ComboBox Name="textBox" Style="{StaticResource comboBoxCustom}"/>
+            <ComboBox ItemsSource="{Binding Path=DataList,ElementName=myComboBox}"  DisplayMemberPath="Value" Name="comboBox" Style="{StaticResource comboBoxCustom}" />
         </Grid>
     </StackPanel>
 </UserControl>
