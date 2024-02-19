@@ -1,5 +1,5 @@
 
-# Inventory Management - Assignment 1
+# Inventory Management - Assignment 1 - PRN221_NET1707
 
 Ứng dụng desktop WPF quản lí hàng hóa
 
